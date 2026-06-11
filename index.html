@@ -1,938 +1,502 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pedidos de Artes | Maicon Designer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Dia dos Namorados 💙</title>
 
-  <style>
-    :root{
-      --bg:#0b0b0b;
-      --card:#101012;
-      --soft:#151518;
-      --border:rgba(255,255,255,0.06);
-      --text:#e9e9ea;
-      --muted:#a2a6ad;
-      --accent:#6eb7ff;
-      --accent2:#8fe2ff;
-      --radius:16px;
-      --max:1180px;
-      --shadow: 0 18px 50px rgba(0,0,0,.65);
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(110,183,255,.10), transparent 55%),
-                  radial-gradient(900px 600px at 90% 10%, rgba(143,226,255,.08), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.45;
-      -webkit-font-smoothing:antialiased;
-      scroll-behavior:smooth;
-    }
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
+<style>
 
-    .container{width:min(92%, var(--max)); margin:0 auto}
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      padding:8px 12px;border-radius:999px;
-      color:var(--muted);
-      font-weight:600;
-      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
-      white-space: nowrap;
-    }
-
-    .pill::-webkit-scrollbar{
-  display: none;                /* Chrome / mobile */
-}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      color:var(--text);
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:hover{transform:translateY(-2px); border-color:rgba(255,255,255,0.12)}
-    .btn.primary{
-      background:linear-gradient(90deg, var(--accent), var(--accent2));
-      border-color:transparent;
-      color:#071018;
-      box-shadow:0 18px 40px rgba(110,183,255,.18);
-    }
-    .btn.ghost{
-      background:transparent;
-    }
-    .btn.full{width:100%}
-
-    /* ====== NAV ====== */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(11,11,11,.55);
-      border-bottom:1px solid rgba(255,255,255,0.05);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.3px;
-    }
-    .brand .dot{color:var(--accent)}
-    .links{display:flex; gap:14px; align-items:center}
-    .links a{
-      color:var(--muted);
-      font-weight:700;
-      padding:8px 10px;
-      border-radius:10px;
-      transition:background .18s ease, color .18s ease;
-    }
-    .links a:hover{background:rgba(255,255,255,0.03); color:var(--text)}
-    .menuBtn{display:none}
-
-    /* ====== HERO ====== */
-    .hero{
-      padding:56px 0 22px;
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:26px;
-      align-items:center;
-    }
-    .hero h1{
-      font-size:clamp(2rem, 4.2vw, 3.3rem);
-      line-height:1.02;
-      margin:14px 0 12px;
-      letter-spacing:-.6px;
-    }
-    .hero p{
-      color:var(--muted);
-      font-size:1.02rem;
-      max-width:60ch;
-    }
-    .heroCtas{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:18px;
-    }
-    .heroCard{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    .heroCard .preview{
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.06);
-      background:rgba(0,0,0,0.4);
-    }
-    .heroCard .mini{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:12px;
-    }
-    .tagRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-
-    /* ====== SECTIONS ====== */
-    section{padding:42px 0}
-    .sectionTitle{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
-      margin-bottom:18px;
-    }
-    .sectionTitle h2{
-      font-size:1.65rem;
-      letter-spacing:-.2px;
-    }
-    .sectionTitle .hint{color:var(--muted); font-weight:650}
-
-    /* ====== PORTFOLIO ====== */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:16px;
-    }
-    .work{
-      grid-column: span 4;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.02);
-      border-radius:var(--radius);
-      overflow:hidden;
-      position:relative;
-      box-shadow: 0 16px 40px rgba(0,0,0,.45);
-      cursor:pointer;
-      transition: transform .22s ease, border-color .22s ease;
-    }
-    .work:hover{transform:translateY(-6px); border-color:rgba(255,255,255,0.12)}
-    .work .thumb{
-      aspect-ratio: 4/3;
-      background:#0a0a0a;
-      overflow:hidden;
-    }
-    .work .thumb img{
-      width:100%; height:100%; object-fit:cover;
-      transition: transform .45s cubic-bezier(.2,.9,.2,1);
-    }
-    .work:hover .thumb img{transform:scale(1.06)}
-    .work .meta{
-      padding:14px 14px 16px;
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-    }
-    .work .title{font-weight:900}
-    .work .sub{color:var(--muted); font-weight:650; font-size:.93rem; margin-top:4px}
-    .chip{
-      font-size:.78rem; font-weight:900; color:#071018;
-      background:linear-gradient(90deg, var(--accent), var(--accent2));
-      padding:8px 10px; border-radius:999px;
-      white-space:nowrap;
-    }
-
-    /* ====== PACKAGES ====== */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:16px;
-    }
-    .card{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:16px;
-      box-shadow: var(--shadow);
-    }
-    .card h3{font-size:1.1rem}
-    .price{font-size:1.7rem; font-weight:950; margin:10px 0 8px}
-    .list{margin:10px 0 14px; display:grid; gap:8px; color:var(--muted); font-weight:650}
-    .list span{display:flex; gap:10px; align-items:flex-start}
-    .list .ok{color:var(--accent); font-weight:900}
-
-    /* ====== HOW TO ORDER ====== */
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:14px;
-    }
-    .step{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.02);
-      border-radius:var(--radius);
-      padding:14px;
-    }
-    .step b{display:block; margin-bottom:6px}
-    .step p{color:var(--muted); font-weight:650; font-size:.95rem}
-
-    /* ====== ORDER FORM ====== */
-    .orderWrap{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:start;
-    }
-
-select {
-  background-color: rgba(255,255,255,0.03);
-  color: #e9e9ea;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 12px;
-  font-weight: 650;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-/* FORÇA COR DAS OPTIONS */
-select option {
-  background-color: #0b0b0b; /* fundo escuro */
-  color: #e9e9ea;            /* texto claro */
+html{
+scroll-behavior:smooth;
 }
 
-
-    .form{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:16px;
-      box-shadow: var(--shadow);
-    }
-    label{display:block; font-weight:800; margin:12px 0 8px}
-    input, select, textarea{
-      width:100%;
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:12px;
-      padding:12px 12px;
-      color:var(--text);
-      outline:none;
-      font-weight:650;
-    }
-    textarea{min-height:120px; resize:vertical}
-    input::placeholder, textarea::placeholder{color:rgba(162,166,173,0.75)}
-    .help{color:var(--muted); font-weight:650; font-size:.92rem; margin-top:10px}
-    .sideInfo{
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.02);
-      border-radius:var(--radius);
-      padding:16px;
-    }
-    .sideInfo h3{margin-bottom:8px}
-    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-
-    /* ====== CONTACT ====== */
-    .contactBox{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow: var(--shadow);
-      display:flex; gap:16px; align-items:center; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .contactBox p{color:var(--muted); font-weight:650}
-    footer{
-      padding:26px 0 46px;
-      color:var(--muted);
-      border-top:1px solid rgba(255,255,255,0.05);
-      margin-top:18px;
-    }
-
-    /* ====== MODAL ====== */
-    .modal{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,0.74);
-      backdrop-filter: blur(10px);
-      display:none;
-      align-items:center; justify-content:center;
-      padding:18px;
-      z-index:200;
-    }
-    .modal.open{display:flex}
-    .modalBox{
-      width:min(980px, 96vw);
-      border:1px solid rgba(255,255,255,0.08);
-      background:#070707;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow: 0 30px 90px rgba(0,0,0,.8);
-      position:relative;
-    }
-    .modalMedia{
-      background:#000;
-      max-height:72vh;
-    }
-    .modalMedia img{
-      width:100%; height:72vh; object-fit:contain;
-      display:block;
-    }
-    .modalBody{padding:14px 16px 16px}
-    .modalBody h3{font-size:1.1rem}
-    .modalBody p{color:var(--muted); font-weight:650; margin-top:6px}
-    .x{
-      position:absolute; top:10px; right:10px;
-      width:44px; height:44px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:rgba(255,255,255,0.03);
-      color:var(--text);
-      cursor:pointer;
-      font-weight:900;
-    }
-
-    /* ====== RESPONSIVO ====== */
-    @media (max-width: 980px){
-      .hero{grid-template-columns: 1fr; padding-top:40px}
-      .cards{grid-template-columns: 1fr}
-      .steps{grid-template-columns: 1fr 1fr}
-      .orderWrap{grid-template-columns: 1fr}
-      .work{grid-column: span 6}
-      .links{display:none}
-      .menuBtn{display:inline-flex}
-    }
-    @media (max-width: 640px){
-      .work{grid-column: span 12}
-      .steps{grid-template-columns: 1fr}
-      .heroCard .mini{grid-template-columns: 1fr 1fr}
-      .btn{width:100%}
-      .heroCtas{width:100%}
-    }
-
-    .price {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  margin: 10px 0 8px;
+body{
+font-family:'Poppins',sans-serif;
+background:#0A192F;
+color:white;
+overflow-x:hidden;
 }
 
-.new-price {
-  font-size: 0.9rem;
-  color: rgba(233,233,234,0.5);
-  text-decoration: line-through;
-  font-weight: 700;
+/* FUNDO AZUL */
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#3B82F660,transparent 40%),
+radial-gradient(circle at bottom right,#60A5FA50,transparent 40%);
+z-index:-2;
 }
 
-.old-price {
-  font-size: 1.8rem;
-  font-weight: 950;
-  color: #fff;
+body::after{
+content:"";
+position:fixed;
+inset:0;
+backdrop-filter:blur(120px);
+z-index:-1;
 }
 
-.reviews{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap:16px;
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
 }
 
-.review{
-  border:1px solid var(--border);
-  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border-radius:var(--radius);
-  padding:16px;
-  display:flex;
-  gap:12px;
-  box-shadow: var(--shadow);
+.hero-content{
+max-width:900px;
 }
 
-.avatar{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  color:#071018;
-  background:linear-gradient(90deg, var(--accent), var(--accent2));
-  flex-shrink:0;
+.hero img{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #60A5FA;
+box-shadow:0 0 40px rgba(96,165,250,.6);
+margin-bottom:25px;
 }
 
-.review .text{
-  font-weight:650;
-  color:var(--text);
+.hero h1{
+font-size:clamp(2.8rem,6vw,5rem);
+font-family:'Great Vibes',cursive;
+color:#93C5FD;
 }
 
-.review .meta{
-  margin-top:8px;
-  color:var(--muted);
-  font-weight:700;
-  font-size:.92rem;
+.hero p{
+font-size:1.1rem;
+margin-top:20px;
+opacity:.9;
+line-height:1.8;
 }
 
-.disclaimer{
-  margin-top:10px;
-  color:rgba(162,166,173,.7);
-  font-size:.85rem;
+.btn{
+display:inline-block;
+margin-top:35px;
+padding:15px 30px;
+background:linear-gradient(135deg,#2563EB,#60A5FA);
+border-radius:50px;
+text-decoration:none;
+color:white;
+font-weight:600;
+box-shadow:0 0 25px rgba(59,130,246,.5);
+transition:.3s;
 }
 
-/* Responsivo */
-@media (max-width: 980px){
-  .reviews{grid-template-columns: 1fr}
+.btn:hover{
+transform:translateY(-3px);
 }
 
+/* TITULOS */
 
-  </style>
+.section-title{
+font-size:2.4rem;
+text-align:center;
+margin-bottom:50px;
+font-family:'Great Vibes',cursive;
+color:#93C5FD;
+}
 
+/* GALERIA */
+
+.gallery{
+padding:90px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.grid img{
+width:100%;
+height:320px;
+object-fit:cover;
+border-radius:25px;
+transition:.4s;
+cursor:pointer;
+box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+.grid img:hover{
+transform:scale(1.03);
+}
+
+/* PLAYER */
+
+.music{
+padding:100px 20px;
+text-align:center;
+}
+
+.music-card{
+max-width:500px;
+margin:auto;
+padding:35px;
+border-radius:30px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.1);
+box-shadow:0 0 25px rgba(96,165,250,.15);
+}
+
+.music h2{
+margin-bottom:20px;
+font-size:2rem;
+color:#93C5FD;
+}
+
+.music p{
+margin-bottom:25px;
+opacity:.8;
+}
+
+audio{
+width:100%;
+}
+
+/* POESIA */
+
+.poetry{
+padding:90px 20px;
+}
+
+.poetry-box{
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,.04);
+padding:50px;
+border-radius:30px;
+border:1px solid rgba(147,197,253,.15);
+line-height:2;
+font-size:1.05rem;
+box-shadow:0 0 30px rgba(96,165,250,.1);
+}
+
+/* CARDS */
+
+.love{
+padding:90px 20px;
+}
+
+.cards{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+padding:30px;
+border-radius:25px;
+text-align:center;
+transition:.3s;
+border:1px solid rgba(147,197,253,.08);
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 35px rgba(96,165,250,.15);
+}
+
+.card h3{
+font-size:1.4rem;
+margin-bottom:10px;
+color:#93C5FD;
+}
+
+/* CONTADOR */
+
+.counter{
+padding:100px 20px;
+text-align:center;
+}
+
+.counter-box{
+font-size:1.5rem;
+line-height:2;
+}
+
+#tempo{
+font-size:2rem;
+font-weight:bold;
+color:#60A5FA;
+}
+
+/* FINAL */
+
+.final{
+padding:100px 20px;
+text-align:center;
+}
+
+.final img{
+width:100%;
+max-width:500px;
+border-radius:30px;
+margin-bottom:30px;
+box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.final h2{
+font-family:'Great Vibes',cursive;
+font-size:3rem;
+color:#93C5FD;
+margin-bottom:20px;
+}
+
+.final p{
+max-width:700px;
+margin:auto;
+line-height:2;
+font-size:1.1rem;
+}
+
+/* CORAÇÕES AZUIS */
+
+.heart{
+position:fixed;
+font-size:20px;
+animation:float 6s linear forwards;
+pointer-events:none;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <span>Maicon - Knox Studio</span><span class="dot">•</span>
-      </div>
 
-      <nav class="links" aria-label="Menu">
-        <a href="#portfolio">Portfólio</a>
-        <a href="#pacotes">Pacotes</a>
-        <a href="#pedido">Fazer pedido</a>
-        <a href="#contato">Contato</a>
-      </nav>
+<section class="hero">
 
-      
-    </div>
-  </header>
+<div class="hero-content">
 
-  <main>
-    <!-- HERO -->
-    <section class="container hero" id="topo">
-      <div>
-        <span class="pill">Artes para Instagram • Banners • Promoções • Identidade</span>
-        <h1>Peça sua arte profissional em minutos e receba pronto para postar.</h1>
+<img src="foto-principal.jpg" alt="Nossa Foto">
 
-        <div class="heroCtas">
-          <a class="btn primary" href="#pedido">Fazer pedido agora</a>
-          
-        </div>
+<h1>Feliz Dia dos Namorados 💙</h1>
 
-        <div class="tagRow">
-          <span class="pill">Entrega rápida</span>
-          <span class="pill">Revisão inclusa</span>
-          <span class="pill">Artes que chamam atenção</span>
-        </div>
-      </div>
+<p>
+Cada momento ao seu lado transformou minha vida e agora não me imagino sem ti.
+</p>
 
-     
-    </section>
+<a href="#galeria" class="btn">ver galeria</a>
 
-    <!-- PORTFÓLIO -->
-    <section class="container" id="portfolio">
-      <div class="sectionTitle">
-        <h2>Exemplos</h2>
-        
-      </div>
-
-      <div class="grid" id="portfolioGrid">
-        <!-- Recomendação: coloque 6 a 12 artes aqui. Mantive 6 de exemplo. -->
-
-        <article class="work" data-title="Promoção • Burger" data-desc="Post para redes sociais" data-src="design-01.png">
-          <div class="thumb"><img src="design-01.png" alt="Arte 01" /></div>
-          <div class="meta">
-            <div>
-              <div class="title">reconhecimento • Hamburgueria</div>
-              <div class="sub">Flyer</div>
-            </div>
-            <div class="chip">Ver</div>
-          </div>
-        </article>
-
-        <article class="work" data-title="Coleção Street" data-desc="Banner / Social" data-src="design-02.png">
-          <div class="thumb"><img src="design-02.png" alt="Arte 02" /></div>
-          <div class="meta">
-            <div>
-              <div class="title">Flyer Academia</div>
-              <div class="sub">Post para instagram</div>
-            </div>
-            <div class="chip">Ver</div>
-          </div>
-        </article>
-
-        <article class="work" data-title="Anúncio Energético" data-desc="Mockup / Promo" data-src="design-03.png">
-          <div class="thumb"><img src="design-03.png" alt="Arte 03" /></div>
-          <div class="meta">
-            <div>
-              <div class="title">Salão Beleza Feminina</div>
-              <div class="sub">Precificação</div>
-            </div>
-            <div class="chip">Ver</div>
-          </div>
-        </article>
-
-        <article class="work" data-title="Arte 04" data-desc="Exemplo de post" data-src="design-04.png">
-          <div class="thumb"><img src="design-04.png" alt="Arte 04" /></div>
-          <div class="meta">
-            <div>
-              <div class="title">Mecânica</div>
-              <div class="sub">Flyer</div>
-            </div>
-            <div class="chip">Ver</div>
-          </div>
-        </article>
-
-        <article class="work" data-title="Arte 05" data-desc="Exemplo de banner" data-src="design-05.png">
-          <div class="thumb"><img src="design-05.png" alt="Arte 05" /></div>
-          <div class="meta">
-            <div>
-              <div class="title">Flyer Hamburgueria</div>
-              <div class="sub">Post instagram</div>
-            </div>
-            <div class="chip">Ver</div>
-          </div>
-        </article>
-
-        <article class="work" data-title="Arte 06" data-desc="Exemplo de campanha" data-src="design-06.png">
-          <div class="thumb"><img src="design-06.png" alt="Arte 06" /></div>
-          <div class="meta">
-            <div>
-              <div class="title">Flyer Sorveteria</div>
-              <div class="sub">Post instagram</div>
-            </div>
-            <div class="chip">Ver</div>
-          </div>
-        </article>
-      </div>
-
-     
-    </section>
-
-    <!-- PACOTES -->
-    <section class="container" id="pacotes">
-      <div class="sectionTitle">
-        <h2>Pacotes</h2>
-   
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <h3>Arte avulsa</h3>
-          <div class="price">R$ 30</div>
-          <div class="list">
-            <span><span class="ok">✓</span> 1 arte (post ou story)</span>
-            <span><span class="ok">✓</span> 1 revisão</span>
-            <span><span class="ok">✓</span> Entrega rápida</span>
-          </div>
-          <button class="btn full" data-pack="Arte avulsa">Pedir este pacote</button>
-        </div>
-
-     <div class="card" style="border-color:rgba(110,183,255,0.30)">
-  <h3>Pacote 12 artes</h3>
-
-  <div class="price">
-    <span class="old-price">R$ 300</span>
-    <span class="new-price">R$ 360</span>
-  </div>
-
-  <div class="list">
-    <span><span class="ok">✓</span> 12 artes para feed/story</span>
-    <span><span class="ok">✓</span> Ajustes e padronização</span>
-    <span><span class="ok">✓</span> Melhor custo-benefício</span>
-  </div>
-
-  <button class="btn primary full" data-pack="Pacote 10 artes">
-    Pedir este pacote
-  </button>
 </div>
 
-
-        <div class="card">
-          <h3>Pacote mensal</h3>
-          <div class="price">R$ 350</div>
-          <div class="list">
-            <span><span class="ok">✓</span> 3 artes por semana</span>
-            <span><span class="ok">✓</span> Identidade consistente</span>
-            <span><span class="ok">✓</span> Prioridade no atendimento</span>
-          </div>
-          <button class="btn full" data-pack="Pacote mensal">Pedir este pacote</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMO PEDIR -->
-    <section class="container" id="como-pedir">
-      <div class="sectionTitle">
-        <h2>Como funciona o pedido</h2>
-       
-      </div>
-
-      <div class="steps">
-        <div class="step">
-          <b>1) Escolha o tipo</b>
-          <p>Post, story, banner, capa, promoção, etc.</p>
-        </div>
-        <div class="step">
-          <b>2) Envie infos</b>
-          <p>Texto, preço, cores, logo, referência.</p>
-        </div>
-        <div class="step">
-          <b>3) Eu crio</b>
-          <p>Você acompanha e pede ajustes (se necessário).</p>
-        </div>
-        <div class="step">
-          <b>4) Entrego pronto</b>
-          <p>Arquivo final para postar em alta qualidade.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PEDIDO -->
-    <section class="container" id="pedido">
-      <div class="sectionTitle">
-        <h2>Fazer pedido</h2>
-     
-      </div>
-
-      <div class="orderWrap">
-        <form class="form" id="orderForm">
-          <label for="name">Seu nome</label>
-          <input id="name" name="name" placeholder="Ex: João da Loja X" required />
-
-          <label for="type">Tipo de arte</label>
-          <select id="type" name="type" required>
-            <option value="" selected disabled>Selecione…</option>
-            <option>Post Instagram (feed)</option>
-            <option>Story Instagram</option>
-            <option>Banner / Capa</option>
-            <option>Promoção / Oferta</option>
-            <option>Identidade / Kit social</option>
-            <option>Outro</option>
-          </select>
-
-          <label for="deadline">Prazo</label>
-          <select id="deadline" name="deadline" required>
-            <option value="" selected disabled>Selecione…</option>
-            <option>Urgente (hoje)</option>
-            <option>24h</option>
-            <option>2–3 dias</option>
-            <option>Sem pressa</option>
-          </select>
-
-          <label for="details">Detalhes do pedido</label>
-          <textarea id="details" name="details" placeholder="Texto da arte, preço, cores, tamanho, referências, se tem logo, etc." required></textarea>
-
-          <label for="reference">Link de referência (opcional)</label>
-          <input id="reference" name="reference" placeholder="Ex: https://instagram.com/..." />
-
-          <button class="btn primary full" type="submit">Enviar pedido no WhatsApp</button>
-
-          <div class="help">
-            Dica: se tiver logo/imagens, você envia depois no WhatsApp.
-          </div>
-        </form>
-
-        <aside class="sideInfo">
-          <h3>Atendimento via WhatsApp</h3>
-          <p style="color:var(--muted); font-weight:650">
-            Clique no botão para abrir o WhatsApp com a mensagem pronta.
-            Depois, é só enviar seu logo e referências.
-          </p>
-
-          <div class="badges">
-            <span class="pill">✅ Resposta rápida</span>
-            <span class="pill">✅ Revisão inclusa</span>
-            <span class="pill">✅ Arquivo final HD</span>
-          </div>
-
-          <div style="margin-top:14px">
-            <button class="btn full" id="whatsDirectBtn">Falar direto no WhatsApp</button>
-          </div>
-
-          
-        </aside>
-      </div>
-    </section>
-
-
-<section class="container" id="avaliacoes">
-  <div class="sectionTitle">
-    <h2>Feedbacks</h2>
- 
-  </div>
-
-  <div class="reviews">
-    <article class="review">
-      <div class="avatar">A</div>
-      <div class="content">
-        <p class="text">
-          Me entregou rapido, forneceu alterações e realmente entregou algo coerente com meu comercio
-        </p>
-        <div class="meta">
-          <strong>Paulo Ricardo</strong>
-          <span>• Lanchonete</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="review">
-      <div class="avatar">M</div>
-      <div class="content">
-        <p class="text">
-          Entregou pacote certinho o preço compensou muito pela qualidade, Me surpreendeu!!
-        </p>
-        <div class="meta">
-          <strong>Marina Alves</strong>
-          <span>• Revendedora</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="review">
-      <div class="avatar">C</div>
-      <div class="content">
-        <p class="text">
-        As artes no prazo e com qualidade otima pronto para postar no meu instagram
-        </p>
-        <div class="meta">
-          <strong>Carlos</strong>
-          <span>• Professor</span>
-        </div>
-      </div>
-    </article>
-  </div>
-
- 
-
-  <div style="margin-top:14px">
-    <button class="btn primary" id="feedbackBtn">
-  Deixar um feedback
-</button>
-
-  </div>
 </section>
 
+<section id="galeria" class="gallery">
 
-    <!-- CONTATO -->
-    <section class="container" id="contato">
-      <div class="contactBox">
-        <div>
-          <h2 style="font-size:1.35rem; margin-bottom:6px">Pronto para pedir?</h2>
-          <p>Me chame no WhatsApp e vamos criar uma arte incrível para seu negócio.</p>
-        </div>
-        <button class="btn primary" id="whatsBottomBtn">Ir para o WhatsApp</button>
-      </div>
-    </section>
+<h2 class="section-title">Nossos Momentos</h2>
 
-    <footer>
-      <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
-        <div>© <b>Maicon - Knox Studio</b> </div>
-        <div style="color:rgba(162,166,173,.85)">Site • Portfólio • WhatsApp</div>
-      </div>
-    </footer>
-  </main>
+<div class="grid">
 
-  <!-- MODAL PORTFÓLIO -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalBox" role="dialog" aria-modal="true" aria-label="Visualização da arte">
-      <button class="x" id="closeModal" aria-label="Fechar">✕</button>
-      <div class="modalMedia">
-        <img id="modalImg" alt="Arte ampliada" />
-      </div>
-      <div class="modalBody">
-        <h3 id="modalTitle"></h3>
-        <p id="modalDesc"></p>
-      </div>
-    </div>
-  </div>
+<img src="foto1.jpg" alt="">
+<img src="foto2.jpg" alt="">
+<img src="foto3.jpg" alt="">
+<img src="foto4.jpg" alt="">
+<img src="foto5.jpg" alt="">
+<img src="foto6.jpg" alt="">
 
-  <script>
-  // ===== WhatsApp =====
-  const WHATSAPP_NUMBER = "5577991952760";
+</div>
 
-  function openWhatsApp(message) {
-    const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
-    window.open(url, "_blank");
-  }
+</section>
 
-  // Só adiciona evento se o elemento existir
-  const whatsHeroBtn = document.getElementById("whatsHeroBtn");
-  if (whatsHeroBtn) {
-    whatsHeroBtn.addEventListener("click", () => {
-      openWhatsApp("Olá! Quero fazer um pedido de arte. Pode me passar os valores e prazos?");
-    });
-  }
+<section class="music">
 
-  const whatsPortfolioBtn = document.getElementById("whatsPortfolioBtn");
-  if (whatsPortfolioBtn) {
-    whatsPortfolioBtn.addEventListener("click", () => {
-      openWhatsApp("Olá! Vi seu portfólio e quero pedir uma arte parecida. Podemos conversar?");
-    });
-  }
+<div class="music-card">
 
-  const whatsDirectBtn = document.getElementById("whatsDirectBtn");
-  if (whatsDirectBtn) {
-    whatsDirectBtn.addEventListener("click", () => {
-      openWhatsApp("Olá! Quero fazer um pedido de arte. Meu tipo de projeto é: ____");
-    });
-  }
+<h2>🎵 Noctilune No.2</h2>
 
-  const whatsBottomBtn = document.getElementById("whatsBottomBtn");
-  if (whatsBottomBtn) {
-    whatsBottomBtn.addEventListener("click", () => {
-      openWhatsApp("Olá! Quero pedir uma arte. Me diga como começamos?");
-    });
-  }
+<p><strong>Dê play na música para ler 💙</strong></p>
 
-  // Pacotes -> Whats
-  document.querySelectorAll("[data-pack]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const pack = btn.getAttribute("data-pack");
-      openWhatsApp(`Olá! Quero pedir o pacote: ${pack}. Pode me passar os valores e o que está incluso?`);
-    });
-  });
+<audio controls>
+<source src="musica.mp3" type="audio/mpeg">
+Seu navegador não suporta áudio.
+</audio>
 
-  // Form -> Whats
-  const orderForm = document.getElementById("orderForm");
-  if (orderForm) {
-    orderForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+</div>
 
-      const name = document.getElementById("name").value.trim();
-      const type = document.getElementById("type").value.trim();
-      const deadline = document.getElementById("deadline").value.trim();
-      const details = document.getElementById("details").value.trim();
-      const reference = document.getElementById("reference").value.trim();
+</section>
 
-      const msg =
-        `Olá! Quero fazer um pedido de arte.\n\n` +
-        `👤 Nome: ${name}\n` +
-        `🎨 Tipo: ${type}\n` +
-        `⏱️ Prazo: ${deadline}\n\n` +
-        `📝 Detalhes:\n${details}\n\n` +
-        (reference ? `🔗 Referência: ${reference}\n\n` : "") +
-        `Obrigado!`;
+<section class="poetry">
 
-      openWhatsApp(msg);
-    });
-  }
+<h2 class="section-title">Uma Carta Para Você</h2>
 
-  // ===== Modal do Portfólio =====
-  const modal = document.getElementById("modal");
-  const modalImg = document.getElementById("modalImg");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalDesc = document.getElementById("modalDesc");
-  const closeModalBtn = document.getElementById("closeModal");
+<div class="poetry-box">
 
-  function openModal(src, title, desc) {
-    modalImg.src = src;
-    modalTitle.textContent = title || "";
-    modalDesc.textContent = desc || "";
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-  }
+<p>
 
-  function closeModal() {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
-    modalImg.src = "";
-  }
+O que sinto por você é como uma sinfonia suave, como o som de um violino em um dia de chuva — algo que toca fundo e não se apaga. Amo você de tal forma que não consigo imaginar minha existência sem a sua presença. Reconheço que és um ser único, daqueles que não surgem duas vezes: em um mundo onde tudo parece passageiro e compartilhado, foi você quem chegou e despertou a parte mais profunda da minha alma, como se tivesse lhe dado uma nova voz.
+ 
+Ninguém antes me mostrou o quanto é bom ser amado, nem o quanto é maravilhoso poder amar alguém de verdade. Você sempre esteve ao meu lado, apoiando até mesmo as minhas ideias mais ousadas, e nunca deixou de acreditar no futuro que podemos construir juntos. Percebo cada esforço seu, cada pequeno gesto que faz com carinho. Quando me olha com esses olhos castanhos, vejo uma verdadeira obra de arte — daquelas que nos fazem desejar ficar ali para sempre, como o sentimento de um fim de tarde: há alegria por estar vivendo aquele momento, mas também um receio suave de que ele possa acabar. Mesmo assim, tenho certeza de que isso não acontecerá, pois se o brilho do sol dependesse do meu amor para continuar, ele jamais se poria — amo você muito além do que as palavras podem explicar.
+ 
+Admiro os seus cabelos cacheados e as suas bochechas macias. Sei que às vezes você duvida de si mesma: acha que não está bem, que come pouco, que os seus sonhos são grandes demais ou que não se esforça o suficiente. Mas saiba que, de dentro de nós, nem sempre conseguimos ver o nosso próprio valor. Eu te enxergo como uma mulher incrível, forte, inteligente e determinada — e é por causa de você que também me motivei a correr atrás dos meus sonhos. Agora, os meus desejos incluem ver você conquistar os seus: viajar, viver em paz, envelhecer juntos, ver filhos correndo por perto, guardar memórias em um álbum de viagens e, acima de tudo, poder sempre contemplar o seu sorriso.
+ 
+Desejo do fundo do coração nunca fazer rolar dos seus olhos uma lágrima de tristeza ou dor — apenas aquelas que surgem de tanto rir. Quero te ver feliz e farei o possível para que não desista de nada. Na sua caminhada, serei como um companheiro de estrada: não posso garantir que os sonhos se realizarão de imediato, mas estarei sempre ao seu lado, ajudando-a a chegar onde deseja.
+ 
+Não fique triste por eu não escrever isto em um papel, pois palavras soltas, sem uma melodia que as envolva, não conseguem transmitir nem um pouco do tamanho do amor que sinto por ti — assim como na história da Bela e da Fera. Guarde todos os livros que te dou com carinho, e não os compartilhe com ninguém: pouco a pouco, a sua Fera irá construir a sua biblioteca inteira, só para você, minha Bela.
+ 
+Isso é apenas uma parte do que sinto, pois palavras não bastam para medir esse amor. Escrevo isso nesta madrugada, por volta da meia-noite e doze, quando você já dormia, enquanto eu permanecia acordado pensando em você e em tudo o que ainda vamos viver. Escutava uma melodia suave, e senti que nem a música mais bela consegue expressar o que trago no peito. Esse sentimento é exclusivo seu, e sempre será. Não há espaço para mais ninguém: aprendi que não se troca um diamante raro por moedas comuns, pois nenhuma delas tem o brilho, a beleza e o valor que você tem para mim.
+ 
+Com todo o meu amor,
+Seu Pocoyo
 
-  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+💙
 
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
-  }
+</p>
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal();
-  });
+</div>
 
-  // Aqui está o que faz o click abrir o modal
-  document.querySelectorAll(".work").forEach(card => {
-    card.addEventListener("click", () => {
-      openModal(
-        card.getAttribute("data-src"),
-        card.getAttribute("data-title"),
-        card.getAttribute("data-desc")
-      );
-    });
-  });
+</section>
 
+<section class="love">
 
-  const feedbackBtn = document.getElementById("feedbackBtn");
-if (feedbackBtn) {
-  feedbackBtn.addEventListener("click", () => {
-    openWhatsApp(
-      "Olá! Gostaria de deixar um feedback sobre o trabalho.\n\n" +
-      "Meu feedback:\n" +
-      "(nota de 0 a 10)\n" +
-      "Comentário: "
-    );
-  });
+<h2 class="section-title">O Que Eu Amo Em Você</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>💙 Seu Sorriso</h3>
+<p>Ele ilumina até os meus dias mais difíceis.</p>
+</div>
+
+<div class="card">
+<h3>💙 Seu Carinho</h3>
+<p>Me faz sentir amado todos os dias.</p>
+</div>
+
+<div class="card">
+<h3>💙 Sua Companhia</h3>
+<p>Qualquer momento é especial ao seu lado.</p>
+</div>
+
+<div class="card">
+<h3>💙 Seu Jeito</h3>
+<p>É único e impossível de não amar.</p>
+</div>
+
+<div class="card">
+<h3>💙 Seu Coração</h3>
+<p>Cheio de bondade, amor e luz.</p>
+</div>
+
+<div class="card">
+<h3>💙 Você</h3>
+<p>Porque você é simplesmente perfeita para mim.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="counter">
+
+<h2 class="section-title">Nosso Tempo Juntos</h2>
+
+<div class="counter-box">
+
+Estamos juntos há:
+
+<div id="tempo"></div>
+
+</div>
+
+</section>
+
+<section class="final">
+
+<img src="foto-final.jpg" alt="Nossa Foto">
+
+<h2>Eu Te Amo 💙</h2>
+
+<p>
+
+Obrigado por fazer parte da minha vida.
+
+Você é minha melhor escolha todos os dias.
+
+Hoje, amanhã e para sempre minha dona coelha.
+
+💙
+
+</p>
+
+</section>
+
+<script>
+
+const inicio = new Date("2025-10-25");
+
+function atualizarTempo(){
+
+const agora = new Date();
+
+const diff = agora - inicio;
+
+const dias = Math.floor(diff / (1000*60*60*24));
+
+const anos = Math.floor(dias / 365);
+const meses = Math.floor((dias % 365) / 30);
+const restoDias = dias - (anos * 365) - (meses * 30);
+
+document.getElementById("tempo").innerHTML =
+`${anos} anos, ${meses} meses e ${restoDias} dias`;
+
 }
+
+atualizarTempo();
+
+function criarCoracao(){
+
+const heart = document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML = "💙";
+
+heart.style.left = Math.random() * 100 + "vw";
+heart.style.bottom = "-30px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+}
+
+setInterval(criarCoracao,700);
 
 </script>
 
 </body>
 </html>
-
-
-
